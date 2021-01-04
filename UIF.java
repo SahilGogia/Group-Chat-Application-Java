@@ -4,7 +4,7 @@ import java.io.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-class ChatClient {
+class Client {
 	private String host = "localhost";
 	private int port=8989;
 	private String uname;
@@ -13,7 +13,7 @@ class ChatClient {
 	private String clientmessage;
 	protected Socket sock;
 
-	public ChatClient() {
+	public Client() {
 		this.execute();
 	}
 
@@ -32,10 +32,10 @@ class ChatClient {
 class ReadThread extends Thread {
 	private BufferedReader reader;
 	private Socket socket;
-	private ChatClient client;
+	private Client client;
 	private String response;
 
-	public ReadThread(Socket socket, ChatClient client) {
+	public ReadThread(Socket socket, Client client) {
 		this.socket = socket;
 		this.client = client;
 		try {
@@ -67,10 +67,10 @@ class ReadThread extends Thread {
 class WriteThread extends Thread {
 	private PrintWriter writer;
 	private Socket socket;
-	private ChatClient client;
+	private Client client;
   private String userName="";
 	private String text="";
-	public WriteThread(Socket socket, ChatClient client) {
+	public WriteThread(Socket socket, Client client) {
 		this.socket = socket;
 		this.client = client;
 		try {
@@ -108,13 +108,13 @@ class WriteThread extends Thread {
 }
 
 public class UIF {
-	private ChatClient cc;
+	private Client cc;
 	private WriteThread wt;
 
 	public UIF() {
 		try{
 		Socket socket = new Socket("localhost",8989);
-		cc = new ChatClient();
+		cc = new Client();
 		wt = new WriteThread(socket,cc);
 	}catch(Exception e){
 

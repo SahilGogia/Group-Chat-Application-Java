@@ -1,13 +1,13 @@
-package server;
+package GroupChat;
 
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
 
-public class UserThread extends Thread {
+public class clientThread extends Thread {
     private Socket socket;
-    private ChatServer server;
+    private Server server;
     protected PrintWriter writer;
     private String userName;
 		private String serverMessage;
@@ -17,7 +17,7 @@ public class UserThread extends Thread {
 		private String welcomemessage;
 
 
-    public UserThread(Socket socket, ChatServer server) {
+    public clientThread(Socket socket, Server server) {
         this.socket = socket;
         this.server = server;
     }
@@ -61,7 +61,7 @@ public class UserThread extends Thread {
 							else if (clientMessage.contains("kick")) {
 								String[] kick = clientMessage.split(" ");
 
-								UserThread temp = server.getKickusr(kick[1]);
+								clientThread temp = server.getKickusr(kick[1]);
 								server.kickuser(kick[1]);
 								temp.socket.close();
 							}

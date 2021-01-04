@@ -1,11 +1,11 @@
-package client;
+package GroupChat;
 import java.net.*;
 import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ChatClient {
+public class Client {
 	private String host = "localhost";
 	private int port=8989;
 	private String uname;
@@ -25,7 +25,7 @@ public class ChatClient {
 		}
 	}
 	public static void main(String[] args) {
-		ChatClient client = new ChatClient();
+		Client client = new Client();
 		client.execute();
 	}
 }
@@ -34,10 +34,10 @@ public class ChatClient {
 class ReadThread extends Thread {  //Reads from the server
 	private BufferedReader reader;
 	private Socket socket;
-	private ChatClient client;
+	private Client client;
 	private String response;
 
-	public ReadThread(Socket socket, ChatClient client) {
+	public ReadThread(Socket socket, Client client) {
 		this.socket = socket;
 		this.client = client;
 		try {
@@ -71,10 +71,10 @@ class ReadThread extends Thread {  //Reads from the server
 class WriteThread extends Thread {  //writes to the server
 	private PrintWriter writer;
 	private Socket socket;
-	private ChatClient client;
+	private Client client;
   private String userName="";
 	private String text="";
-	public WriteThread(Socket socket, ChatClient client) {
+	public WriteThread(Socket socket, Client client) {
 		this.socket = socket;
 		this.client = client;
 		try {
